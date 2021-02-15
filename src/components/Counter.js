@@ -20,8 +20,6 @@ STEP 0:
   Start by studying the component below, and importing the state hook.
 */
 
-
-
 import React, {useState} from 'react'; /* STEP 0 */
 
 export default function Counter() {
@@ -29,7 +27,7 @@ export default function Counter() {
     Using the state hook, create a 'count', 'setCount' pair.
     The 'count' state should be initialized to the number zero.
   */
-  const {count, setCount} = useState(0);
+  const [count, setCount] = useState(0);
   
   const increment = () => {
     /* STEP 4:
@@ -38,17 +36,21 @@ export default function Counter() {
       Do NOT simply do count++. The plus plus is forbidden! We never mutate a slice of state in place. Even if you could
       reassign a const, React would not be aware anything changed. Always use the state updater, passing in a new value.
     */
+    setCount(count + 1);
   };
   const decrement = () => {
     /* STEP 5:
       This click handler needs to use 'setCount' to set the 'count' to be the current 'count' minus one.
       Do NOT do count--. That amounts to trying to mutate 'count' in place. This is the road to perdition.
     */
+    setCount(count - 1);
+
   };
   const reset = () => {
     /* STEP 6:
       This click handler needs to use 'setCount' to set the 'count' to be zero again.
     */
+    setCount(0);
   };
   /* STEP 2:
     The 'style' object has the 'color' property hard-coded to "royalblue".
@@ -58,7 +60,8 @@ export default function Counter() {
   const style = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* STEP 2 */
+    // color: 'royalblue', /* STEP 2 */
+    color: (count%2===0) ? 'royalblue': 'crimson',
   };
 
   /* STEP 3:
@@ -70,7 +73,7 @@ export default function Counter() {
     <div className='widget-counter container'>
       <h2>Counter</h2>
       <div id='count' style={style}>
-        Number 0 is even {/* STEP 3 */}
+        Number {count} is {count%2 === 0 ? 'even': 'odd'} {/* STEP 3 */}
       </div>
       <div>
         <button id='increment' onClick={increment}>Increment</button>
